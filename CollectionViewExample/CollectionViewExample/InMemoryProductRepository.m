@@ -38,6 +38,13 @@ NSError * productNotFoundError(NSString * productId) {
 
 #pragma mark - Repository Protocol Methods
 
+- (void)fetchProductsWithHandler:(void(^)(NSError *, NSArray *))handler {
+    __block typeof(self) this = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        handler(nil, [this.data allValues]);
+    });
+}
+
 - (void)fetchById:(NSString *)productId withHandler:(void(^)(NSError *, Product *))handler {
     __block typeof(self) this = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
