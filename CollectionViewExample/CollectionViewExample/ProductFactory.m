@@ -35,11 +35,13 @@
         self.ids = 0;
         self.imageURLs = @[
             @"http://www.botasdejugadores.com/wp-content/uploads/2014/03/nike-tiempo-legend-5-rojas-blancas-51.jpg",
-            @"http://2.bp.blogspot.com/-R0T0bXmBCOE/UjbNV9n91aI/AAAAAAAAJHQ/nqg2eNQALZQ/s738/NikeTiempo-Legend-Hi-Vis-Boot-2.jpg"
+            @"http://2.bp.blogspot.com/-R0T0bXmBCOE/UjbNV9n91aI/AAAAAAAAJHQ/nqg2eNQALZQ/s738/NikeTiempo-Legend-Hi-Vis-Boot-2.jpg",
+            @"http://www.yourmomhatesthis.com/images/Dc-Shoes-1a4.png"
         ];
         self.names = @[
             @"Botines Nike Tiempo",
-            @"Botines Nike T90"
+            @"Botines Nike T90",
+            @"Zapatillas"
         ];
         self.prices = @[
             @(70000),
