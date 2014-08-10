@@ -30,6 +30,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="AQv-Cj-JWZ"/>
+                    <connections>
+                        <outlet property="showProductButton" destination="8mU-vs-zmo" id="ARV-xI-Ogl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -79,12 +82,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbj-KM-rwU" customClass="FavoriteButton">
+                                <rect key="frame" x="259" y="83" width="41" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="fav_off">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="favoriteButtonPressed:" destination="AzI-ei-CiK" eventType="touchUpInside" id="H8C-oJ-Ea4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="QOQ-OS-8h7"/>
                     <connections>
+                        <outlet property="favoriteButton" destination="Xbj-KM-rwU" id="MvX-sg-sN2"/>
                         <outlet property="productImageView" destination="fsc-8c-0Nh" id="uPz-mP-pTu"/>
                         <outlet property="productNameLabel" destination="Pyp-g9-sEd" id="8xR-ua-NdA"/>
                         <outlet property="productPriceLabel" destination="D1U-yB-uXl" id="EjB-bK-2Jk"/>
@@ -95,6 +110,9 @@
             <point key="canvasLocation" x="605" y="433"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fav_off" width="128" height="128"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

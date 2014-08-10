@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FavoriteButton.h
 //  CollectionViewExample
 //
 //  Created by Guido Marucci Blas on 8/10/14.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface FavoriteButton : UIButton
 
-@property (weak, nonatomic) IBOutlet UIButton *showProductButton;
+@property(nonatomic, getter = isOn) BOOL on;
+
+- (void)toggle;
 
 @end

@@ -10,12 +10,13 @@
 
 @implementation Product
 
-- (instancetype)initWithName:(NSString *)name price:(NSUInteger)price andImageURL:(NSURL *)imageURL {
+- (instancetype)initWithDictionary:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
-        _name = name;
-        _price = price;
-        _imageURL = imageURL;
+        _productId = attributes[@"id"];
+        _name = attributes[@"name"];
+        _price = [attributes[@"price"] unsignedIntegerValue];
+        _imageURL = [NSURL URLWithString:attributes[@"image_url"]];
     }
     return self;
 }

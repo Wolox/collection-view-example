@@ -37,6 +37,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - View Actions
+
+- (IBAction)favoriteButtonPressed:(id)sender {
+    BOOL previousState = self.favoriteButton.on;
+    [self.favoriteButton toggle];
+    __block typeof(self) this = self;
+    [self.viewModel setFavorited:self.favoriteButton.on withHandler:^(NSError * error) {
+        if (error) {
+            NSLog(@"Product favorite property could not be set to %@: %@",
+                  (this.favoriteButton.on) ? @"YES" : @"NO", error);
+            // TODO handler multiple call. In such case
+            // calls to the API should be serialized
+            MAIN_THREAD(this.favoriteButton.on = previousState);
+        }
+    }];
+}
+
 #pragma mark - Private Methods
 
 - (void)renderViewModel {
@@ -46,6 +63,11 @@
     
     self.productNameLabel.text = self.viewModel.name;
     self.productPriceLabel.text = self.viewModel.price;
+    self.favoriteButton.on = self.viewModel.favorited;
+    [self loadProductImage];
+}
+
+- (void)loadProductImage {
     __block typeof(self) this = self;
     [self.viewModel loadImageWithHandler:^(NSError * error, UIImage * image) {
         if (error) {

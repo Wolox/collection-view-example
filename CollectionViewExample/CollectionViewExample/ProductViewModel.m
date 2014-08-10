@@ -8,22 +8,26 @@
 
 #import "ProductViewModel.h"
 #import "Product.h"
+#import "ProductRepository.h"
 
 @interface ProductViewModel ()
 
 @property(readonly, nonatomic) Product * product;
 @property(nonatomic) NSString * formattedPrice;
+@property(readonly, nonatomic) id<ProductRepository> repository;
 
 @end
 
 @implementation ProductViewModel
 
 @dynamic name;
+@dynamic favorited;
 
 - (instancetype)initWithProduct:(Product *)product {
     self = [super initWithTargetObject:product];
     if (self) {
         _product = product;
+        _repository = [[Application sharedInstance] productRepository];
     }
     return self;
 }
@@ -41,6 +45,20 @@
     } else {
         [self fetchImageWithHandler:handler];
     }
+}
+
+- (void)setFavorited:(BOOL)favorited withHandler:(void(^)(NSError *))handler {
+    if (favorited == self.product.favorited) {
+        handler(nil);
+    }
+    
+    __block typeof(self) this = self;
+    [self.repository favoriteProductWithId:self.product.productId withHandler:^(NSError * error) {
+        if (!error) {
+            this.product.favorited = favorited;
+        }
+        handler(error);
+    }];
 }
 
 #pragma mark - Private Methods

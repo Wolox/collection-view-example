@@ -28,6 +28,9 @@
 		9D5BBB3C19981023000E6A51 /* ProductViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB3B19981023000E6A51 /* ProductViewModel.m */; };
 		9D5BBB401998167B000E6A51 /* ProductFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB3F1998167B000E6A51 /* ProductFactory.m */; };
 		9D5BBB451998184A000E6A51 /* NSArray+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB441998184A000E6A51 /* NSArray+Random.m */; };
+		9D5BBB4919981B8A000E6A51 /* FavoriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB4819981B8A000E6A51 /* FavoriteButton.m */; };
+		9D5BBB51199829A5000E6A51 /* InMemoryProductRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB50199829A5000E6A51 /* InMemoryProductRepository.m */; };
+		9D6C3592199831AE00EE0781 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C3591199831AE00EE0781 /* Application.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,13 @@
 		9D5BBB3F1998167B000E6A51 /* ProductFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductFactory.m; sourceTree = "<group>"; };
 		9D5BBB431998184A000E6A51 /* NSArray+Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Random.h"; sourceTree = "<group>"; };
 		9D5BBB441998184A000E6A51 /* NSArray+Random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Random.m"; sourceTree = "<group>"; };
+		9D5BBB4719981B8A000E6A51 /* FavoriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteButton.h; sourceTree = "<group>"; };
+		9D5BBB4819981B8A000E6A51 /* FavoriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteButton.m; sourceTree = "<group>"; };
+		9D5BBB4E199828EA000E6A51 /* ProductRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductRepository.h; sourceTree = "<group>"; };
+		9D5BBB4F199829A5000E6A51 /* InMemoryProductRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InMemoryProductRepository.h; sourceTree = "<group>"; };
+		9D5BBB50199829A5000E6A51 /* InMemoryProductRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InMemoryProductRepository.m; sourceTree = "<group>"; };
+		9D6C3590199831AE00EE0781 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		9D6C3591199831AE00EE0781 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +143,8 @@
 		9D5BBAF41997FD8D000E6A51 /* CollectionViewExample */ = {
 			isa = PBXGroup;
 			children = (
+				9D5BBB4A19982741000E6A51 /* Repositories */,
+				9D5BBB4619981B6A000E6A51 /* Components */,
 				9D5BBB411998181C000E6A51 /* Categories */,
 				9D5BBB3D19981667000E6A51 /* Factories */,
 				9D5BBB3619980AB9000E6A51 /* Services */,
@@ -144,6 +156,8 @@
 				9D5BBB001997FD8D000E6A51 /* Main.storyboard */,
 				9D5BBB061997FD8D000E6A51 /* Images.xcassets */,
 				9D5BBAF51997FD8D000E6A51 /* Supporting Files */,
+				9D6C3590199831AE00EE0781 /* Application.h */,
+				9D6C3591199831AE00EE0781 /* Application.m */,
 			);
 			path = CollectionViewExample;
 			sourceTree = "<group>";
@@ -233,6 +247,25 @@
 				9D5BBB441998184A000E6A51 /* NSArray+Random.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		9D5BBB4619981B6A000E6A51 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9D5BBB4719981B8A000E6A51 /* FavoriteButton.h */,
+				9D5BBB4819981B8A000E6A51 /* FavoriteButton.m */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		9D5BBB4A19982741000E6A51 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				9D5BBB4E199828EA000E6A51 /* ProductRepository.h */,
+				9D5BBB4F199829A5000E6A51 /* InMemoryProductRepository.h */,
+				9D5BBB50199829A5000E6A51 /* InMemoryProductRepository.m */,
+			);
+			name = Repositories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,13 +366,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D5BBB401998167B000E6A51 /* ProductFactory.m in Sources */,
+				9D6C3592199831AE00EE0781 /* Application.m in Sources */,
 				9D5BBB051997FD8D000E6A51 /* ViewController.m in Sources */,
+				9D5BBB51199829A5000E6A51 /* InMemoryProductRepository.m in Sources */,
 				9D5BBB2A1997FF94000E6A51 /* Product.m in Sources */,
 				9D5BBB451998184A000E6A51 /* NSArray+Random.m in Sources */,
 				9D5BBB3C19981023000E6A51 /* ProductViewModel.m in Sources */,
 				9D5BBB3919980AD8000E6A51 /* ImageFetcher.m in Sources */,
 				9D5BBAFF1997FD8D000E6A51 /* AppDelegate.m in Sources */,
 				9D5BBB3519980A63000E6A51 /* Delegator.m in Sources */,
+				9D5BBB4919981B8A000E6A51 /* FavoriteButton.m in Sources */,
 				9D5BBB251997FE83000E6A51 /* ProductViewController.m in Sources */,
 				9D5BBAFB1997FD8D000E6A51 /* main.m in Sources */,
 			);

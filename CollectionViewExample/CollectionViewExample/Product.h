@@ -10,10 +10,12 @@
 
 @interface Product : NSObject
 
+@property(readonly, nonatomic) NSString * productId;
 @property(readonly, nonatomic) NSString * name;
 @property(readonly, nonatomic) NSUInteger price;
 @property(readonly, nonatomic) NSURL * imageURL;
+@property(nonatomic) BOOL favorited;
 
-- (instancetype)initWithName:(NSString *)name price:(NSUInteger)price andImageURL:(NSURL *)imageURL;
+- (instancetype)initWithDictionary:(NSDictionary *)attributes;
 
 @end

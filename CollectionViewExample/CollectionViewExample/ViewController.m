@@ -8,9 +8,8 @@
 
 #import "ViewController.h"
 
-#import "Product.h"
+#import "ProductRepository.h"
 #import "ProductViewController.h"
-#import "ProductFactory.h"
 
 @interface ViewController ()
 
@@ -22,7 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.productViewModel = [self createProduct];
+    self.showProductButton.enabled = NO;
+    [self fetchProduct];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,9 +39,18 @@
 
 #pragma mark - Private Methods
 
-- (ProductViewModel *)createProduct {
-    Product * product = [[ProductFactory sharedFactory] createProduct];
-    return [[ProductViewModel alloc] initWithProduct:product];
+- (void)fetchProduct {
+    __block typeof(self) this = self;
+    id<ProductRepository> repository = [[Application sharedInstance] productRepository];
+    NSString * productId = @"1";
+    [repository fetchById:productId withHandler:^(NSError * error, Product * product){
+        if (error) {
+            NSLog(@"Product with ID %@ could not be fetched: %@", productId, error);
+        } else {
+            this.productViewModel = [[ProductViewModel alloc] initWithProduct:product];
+            MAIN_THREAD(self.showProductButton.enabled = YES);
+        }
+    }];
 }
 
 @end

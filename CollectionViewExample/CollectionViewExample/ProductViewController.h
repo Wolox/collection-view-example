@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductViewModel.h"
+#import "FavoriteButton.h"
 
 @interface ProductViewController : UIViewController
 
@@ -16,5 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *productImageView;
 @property (weak, nonatomic) IBOutlet UILabel *productPriceLabel;
+@property (weak, nonatomic) IBOutlet FavoriteButton *favoriteButton;
+
+- (IBAction)favoriteButtonPressed:(id)sender;
 
 @end
