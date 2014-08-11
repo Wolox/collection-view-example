@@ -18,6 +18,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <ObjectiveSugar/ObjectiveSugar.h>
 
     #import "Application.h"
 #endif

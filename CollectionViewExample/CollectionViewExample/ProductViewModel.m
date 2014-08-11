@@ -20,14 +20,15 @@
 
 @implementation ProductViewModel
 
+@dynamic productId;
 @dynamic name;
 @dynamic favorited;
 
-- (instancetype)initWithProduct:(Product *)product {
+- (instancetype)initWithProduct:(Product *)product andRepository:(id<ProductRepository>)repository {
     self = [super initWithTargetObject:product];
     if (self) {
         _product = product;
-        _repository = [[Application sharedInstance] productRepository];
+        _repository = repository;
     }
     return self;
 }

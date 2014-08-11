@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8mU-vs-zmo">
-                                <rect key="frame" x="111" y="269" width="98" height="30"/>
+                                <rect key="frame" x="111" y="518" width="98" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Show Product">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -26,11 +26,32 @@
                                     <segue destination="AzI-ei-CiK" kind="push" identifier="ShowProduct" id="410-Kn-zlg"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GbX-Z2-NNY">
+                                <rect key="frame" x="0.0" y="65" width="320" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cei-ut-OJY">
+                                <rect key="frame" x="80" y="456" width="171" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Show Product Collection">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showProductCollectionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tM5-m8-YBD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GbX-Z2-NNY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="6GC-Vp-EGt"/>
+                            <constraint firstItem="GbX-Z2-NNY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="7Yz-Jw-U5V"/>
+                            <constraint firstItem="GbX-Z2-NNY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Sat-sP-kRr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AQv-Cj-JWZ"/>
                     <connections>
+                        <outlet property="productCollectionView" destination="GbX-Z2-NNY" id="OqP-ti-GJR"/>
                         <outlet property="showProductButton" destination="8mU-vs-zmo" id="ARV-xI-Ogl"/>
                     </connections>
                 </viewController>

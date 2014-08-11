@@ -10,10 +10,13 @@
 
 #import "ProductRepository.h"
 #import "ProductViewController.h"
+#import "ProductCollectionViewModel.h"
+#import "ProductCollectionViewController.h"
 
 @interface ViewController ()
 
 @property(nonatomic) ProductViewModel * productViewModel;
+@property(nonatomic) ProductCollectionViewController * productCollection;
 
 @end
 
@@ -21,6 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initProductCollection];
+    
     self.showProductButton.enabled = NO;
     [self fetchProduct];
 }
@@ -39,6 +45,17 @@
 
 #pragma mark - Private Methods
 
+- (ProductCollectionViewController *)createProductCollectionViewController {
+    id<ProductRepository> repository = [[Application sharedInstance] productRepository];
+    ProductCollectionViewModel * viewModel = [[ProductCollectionViewModel alloc] initWithRepository:repository];
+    return [[ProductCollectionViewController alloc] initWithViewModel:viewModel];
+}
+
+- (void)initProductCollection {
+    self.productCollection = [self createProductCollectionViewController];
+    [self.productCollectionView addSubview:self.productCollection.view];
+}
+
 - (void)fetchProduct {
     __block typeof(self) this = self;
     id<ProductRepository> repository = [[Application sharedInstance] productRepository];
@@ -47,10 +64,15 @@
         if (error) {
             NSLog(@"Product with ID %@ could not be fetched: %@", productId, error);
         } else {
-            this.productViewModel = [[ProductViewModel alloc] initWithProduct:product];
+            this.productViewModel = [[ProductViewModel alloc] initWithProduct:product andRepository:repository];
             MAIN_THREAD(self.showProductButton.enabled = YES);
         }
     }];
+}
+
+- (IBAction)showProductCollectionButtonPressed:(id)sender {
+    UIViewController * controller = [self createProductCollectionViewController];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

@@ -24,14 +24,12 @@ typedef void (^CompletionHandler)(NSURLResponse * respondse, NSData * data, NSEr
     NSURLRequest * request = [NSURLRequest requestWithURL: self.imageURL];
     NSOperationQueue * queue = [NSOperationQueue mainQueue];
     CompletionHandler handler = ^(NSURLResponse * response, NSData * data, NSError * error) {
-        NSLog(@"Image with URL '%@' response code is %ld", self.imageURL, ((NSHTTPURLResponse *)response).statusCode);
         UIImage * image = nil;
         if (!error) {
             image = [[UIImage alloc] initWithData:data];
         }
         imageHandler(error, image);
     };
-    NSLog(@"Fetching image with URL '%@'", self.imageURL);
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:handler];
 }
 
