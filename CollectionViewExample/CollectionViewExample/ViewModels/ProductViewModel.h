@@ -11,6 +11,11 @@
 
 @class Product;
 
+extern NSString * const ProductViewModelProductFavoriteChangedNotification;
+
+extern NSString * const ProductViewModelNotificationProductKey;
+
+
 @interface ProductViewModel : Delegator
 
 @property(readonly, nonatomic) NSString * productId;

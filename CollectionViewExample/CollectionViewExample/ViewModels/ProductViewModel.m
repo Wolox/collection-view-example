@@ -10,11 +10,16 @@
 #import "Product.h"
 #import "ProductRepository.h"
 
+NSString * const ProductViewModelProductFavoriteChangedNotification = @"ProductViewModelNotification.Keys.ProductFavoriteChanged";
+
+NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNotification.Keys.Product";
+
 @interface ProductViewModel ()
 
 @property(readonly, nonatomic) Product * product;
 @property(nonatomic) NSString * formattedPrice;
 @property(readonly, nonatomic) id<ProductRepository> repository;
+@property(readonly, nonatomic) NSNotificationCenter * notificationCenter;
 
 @end
 
@@ -30,6 +35,7 @@
     if (self) {
         _product = product;
         _repository = repository;
+        _notificationCenter = [NSNotificationCenter defaultCenter];
     }
     return self;
 }
@@ -58,6 +64,9 @@
     [self.repository favoriteProductWithId:self.product.productId withHandler:^(NSError * error) {
         if (!error) {
             this.product.favorited = favorited;
+            [this.notificationCenter postNotificationName:ProductViewModelProductFavoriteChangedNotification
+                                                   object:this
+                                                 userInfo:@{ProductViewModelNotificationProductKey:this}];
         }
         handler(error);
     }];

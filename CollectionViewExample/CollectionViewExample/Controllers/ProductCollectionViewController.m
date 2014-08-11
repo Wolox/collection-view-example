@@ -21,6 +21,9 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 @interface ProductCollectionViewController ()<ProductCollectionViewCellDelegate>
 
 @property(nonatomic) ProductCollectionViewModel * viewModel;
+@property(nonatomic) NSNotificationCenter * notificationCenter;
+@property(nonatomic, weak) id resetObserver;
+@property(nonatomic, weak) id changedObserver;
 
 @end
 
@@ -31,6 +34,7 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     if (self = [super initWithCollectionViewLayout:layout]) {
         self.viewModel = viewModel;
         self.view.frame = CGRectMake(0, 0, CELL_WIDTH, CELL_HEIGHT);
+        self.notificationCenter = [NSNotificationCenter defaultCenter];
     }
     return self;
 }
@@ -39,7 +43,15 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     [super viewDidLoad];
     [self registerCell];
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    [self loadProducts];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self registerCollectionResetNotificationHandler];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self unregisterCollectionResetNotificationHandler];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,23 +91,30 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     [product setFavorited:on withHandler:^(NSError * error) {
         if (error) {
             NSLog(@"Favorite property could not be set");
-        } else {
-            NSLog(@"Favortie property sucessfully set");
         }
     }];
 }
 
 #pragma mark - Private Methods
 
-- (void)loadProducts {
+- (void)registerCollectionResetNotificationHandler {
     __block typeof(self) this = self;
-    [self.viewModel loadWithHandler:^(NSError * error) {
-        if (error) {
-            NSLog(@"Error loading product collection: %@", error);
-        } else {
-            MAIN_THREAD([this.collectionView reloadData]);
-        }
-    }];
+    void(^handler)(NSNotification *) = ^(NSNotification * note) {
+        MAIN_THREAD([this.collectionView reloadData]);
+    };;
+    self.resetObserver = [self.notificationCenter addObserverForName:ProductCollectionViewModelResetNotification
+                                                              object:self.viewModel
+                                                               queue:[NSOperationQueue mainQueue]
+                                                          usingBlock:handler];
+    self.changedObserver = [self.notificationCenter addObserverForName:ProductCollectionViewModelChangedNotification
+                                                              object:self.viewModel
+                                                               queue:[NSOperationQueue mainQueue]
+                                                          usingBlock:handler];
+}
+
+- (void)unregisterCollectionResetNotificationHandler {
+    [self.notificationCenter removeObserver:self.resetObserver];
+    [self.notificationCenter removeObserver:self.changedObserver];
 }
 
 - (ProductCollectionViewCell *)configureCell:(ProductCollectionViewCell *)cell forProduct:(ProductViewModel *)product {
@@ -130,6 +149,8 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     layout.minimumLineSpacing = 0.0f;
     layout.minimumInteritemSpacing = 0.0f;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    // TODO Remove this hardcoded inset value!
+    layout.sectionInset = UIEdgeInsetsMake(-65, 0, 0, 0);
     return layout;
 }
 

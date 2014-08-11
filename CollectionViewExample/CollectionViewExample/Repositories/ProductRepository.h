@@ -18,6 +18,8 @@
 
 - (void)fetchProductsWithHandler:(void(^)(NSError *, NSArray *))handler;
 
+- (void)fetchProductsWithQuery:(NSDictionary *)query andHandler:(void(^)(NSError *, NSArray *))handler;
+
 - (void)fetchById:(NSString *)productId withHandler:(void(^)(NSError *, Product *))handler;
 
 - (void)favoriteProductWithId:(NSString *)productId withHandler:(void(^)(NSError *))handler;

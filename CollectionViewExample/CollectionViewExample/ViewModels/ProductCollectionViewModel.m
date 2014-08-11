@@ -9,52 +9,89 @@
 #import "ProductCollectionViewModel.h"
 #import "ProductRepository.h"
 #import "ProductViewModel.h"
+#import "FetchAllProductFetcher.h"
 
-@interface ProductCollectionViewModel ()
+NSString * const ProductCollectionViewModelResetNotification = @"ProductCollectionViewModelNotification.Reset";
+NSString * const ProductCollectionViewModelChangedNotification = @"ProductCollectionViewModelNotification.Changed";
+NSString * const ProductCollectionViewModelProductAddedNotification = @"ProductCollectionViewModelNotification.ProductAdded";
+NSString * const ProductCollectionViewModelProductRemovedNotification = @"ProductCollectionViewModelNotification.ProductRemoved";
 
-@property(nonatomic) NSArray * products;
+NSString * const ProductCollectionViewModelNotificationProductKey = @"ProductCollectionViewModelNotification.Keys.Product";
+
+@interface ProductCollectionViewModel () {
+    NSMutableArray * _products;
+}
+
 @property(nonatomic) id<ProductRepository> repository;
+@property(nonatomic) NSNotificationCenter * notificationCenter;
 
 @end
 
 @implementation ProductCollectionViewModel
 
 - (instancetype)initWithRepository:(id<ProductRepository>)repository {
+    return [self initWithProducts:@[] andRepository:repository];
+}
+
+- (instancetype)initWithProducts:(NSArray *)products andRepository:(id<ProductRepository>)repository {
     self = [super init];
     if (self) {
-        self.products = @[];
+        _products = [self decorateProducts:products];
         self.repository = repository;
+        self.notificationCenter = [NSNotificationCenter defaultCenter];
+        self.productFetcher = [[FetchAllProductFetcher alloc] initWithRepository:repository];
     }
     return self;
 }
 
-- (void)loadWithHandler:(void(^)(NSError *))handler {
+- (void)loadWithErrorHandler:(void(^)(NSError *))handler {
     __block typeof(self) this = self;
-    [self.repository fetchProductsWithHandler:^(NSError * error, NSArray * products){
+    [self.productFetcher fetchProductsWithHandler:^(NSError * error, NSArray * products){
         if (error) {
             handler(error);
         } else {
-            this.products = [this decorateProducts:products];
-            handler(nil);
+            [this setProducts:products];
         }
     }];
 }
 
+- (void)setProducts:(NSArray *)products {
+    _products = [self decorateProducts:products];
+    [self.notificationCenter postNotificationName:ProductCollectionViewModelResetNotification object:self];
+}
+
+- (void)addProductViewModel:(ProductViewModel *)productViewModel {
+    [_products addObject:productViewModel];
+    [self.notificationCenter postNotificationName:ProductCollectionViewModelProductAddedNotification
+                                           object:self
+                                         userInfo:@{ProductCollectionViewModelNotificationProductKey: productViewModel}];
+    [self.notificationCenter postNotificationName:ProductCollectionViewModelChangedNotification object:self];
+}
+
+- (void)removeProductViewModel:(ProductViewModel *)productViewModel {
+    [_products removeObject:productViewModel];
+    [self.notificationCenter postNotificationName:ProductCollectionViewModelProductRemovedNotification
+                                           object:self
+                                         userInfo:@{ProductCollectionViewModelNotificationProductKey: productViewModel}];
+    [self.notificationCenter postNotificationName:ProductCollectionViewModelChangedNotification object:self];
+}
+
 - (ProductViewModel *)productAtIndex:(NSUInteger)index {
-    return [self.products objectAtIndex:index];
+    return [_products objectAtIndex:index];
 }
 
 - (NSUInteger) productsCount {
-    return self.products.count;
+    return _products.count;
 }
 
 #pragma mark - Private Methods
 
-- (NSArray *)decorateProducts:(NSArray *)products {
+- (NSMutableArray *)decorateProducts:(NSArray *)products {
     __block typeof(self) this = self;
-    return [products map:^(Product * product) {
+    NSArray * viewModels = [products map:^(Product * product) {
         return [[ProductViewModel alloc] initWithProduct:product andRepository:this.repository];
     }];
+    return [NSMutableArray arrayWithArray:viewModels];
 }
 
 @end

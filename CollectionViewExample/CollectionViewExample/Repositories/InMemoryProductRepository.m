@@ -46,9 +46,19 @@ void simulateAsyncRequest(void(^block)()) {
 #pragma mark - Repository Protocol Methods
 
 - (void)fetchProductsWithHandler:(void(^)(NSError *, NSArray *))handler {
+    [self fetchProductsWithQuery:@{} andHandler:handler];
+}
+
+- (void)fetchProductsWithQuery:(NSDictionary *)query andHandler:(void(^)(NSError *, NSArray *))handler {
     __block typeof(self) this = self;
     simulateAsyncRequest(^{
-        handler(nil, [this.data allValues]);
+        NSArray * products = [this.data allValues];
+        if (query[@"favorite"]) {
+            products = [products select:^(Product * product) {
+                return product.favorited;
+            }];
+        }
+        handler(nil, products);
     });
 }
 

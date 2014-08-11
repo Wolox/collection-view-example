@@ -13,14 +13,14 @@
 #import "ProductCollectionViewModel.h"
 #import "ProductCollectionViewController.h"
 #import "ProductCollectionViewControllerDelegate.h"
+#import "MainViewModel.h"
 
 static NSString * const ShowProductSegue = @"ShowProduct";
 
 @interface ViewController ()<ProductCollectionViewControllerDelegate>
 
 @property(nonatomic) ProductViewModel * selectedProduct;
-@property(nonatomic) ProductCollectionViewController * productCollection;
-@property(nonatomic) ProductCollectionViewController * favoritedProductCollection;
+@property(nonatomic) MainViewModel * viewModel;
 
 @end
 
@@ -28,7 +28,24 @@ static NSString * const ShowProductSegue = @"ShowProduct";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initProductCollections];
+    self.viewModel = [[MainViewModel alloc] initWithRepository:[[Application sharedInstance] productRepository]];
+    [self initChildControllers];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.viewModel registerNotificationHandlers];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.viewModel unregisterNotificationHandlers];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.viewModel loadWithErrorHandler:^(NSError * error) {
+        if (error) {
+            NSLog(@"Product collection could not be fetched!");
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,20 +70,19 @@ static NSString * const ShowProductSegue = @"ShowProduct";
 
 #pragma mark - Private Methods
 
-- (ProductCollectionViewController *)createProductCollectionViewController {
-    id<ProductRepository> repository = [[Application sharedInstance] productRepository];
-    ProductCollectionViewModel * viewModel = [[ProductCollectionViewModel alloc] initWithRepository:repository];
+- (ProductCollectionViewController *)newProductCollectionWithViewModel:(ProductCollectionViewModel *)viewModel {
     ProductCollectionViewController * controller = [[ProductCollectionViewController alloc] initWithViewModel:viewModel];
     controller.delegate = self;
+    [self addChildViewController:controller];
     return controller;
 }
 
-- (void)initProductCollections {
-    self.productCollection = [self createProductCollectionViewController];
-    [self.productCollectionView addSubview:self.productCollection.view];
-    
-    self.favoritedProductCollection = [self createProductCollectionViewController];
-    [self.favoritedProductsCollectionView addSubview:self.favoritedProductCollection.view];
+- (void)initChildControllers {
+    ProductCollectionViewController * controller;
+    controller = [self newProductCollectionWithViewModel:self.viewModel.productsViewModel];
+    [self.productCollectionView addSubview:controller.view];
+    controller = [self newProductCollectionWithViewModel:self.viewModel.favoriteProductsViewModel];
+    [self.favoritedProductsCollectionView addSubview:controller.view];
 }
 
 @end
