@@ -99,6 +99,7 @@
 		9D6C35A0199846F100EE0781 /* ProductCollectionViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewModel.m; sourceTree = "<group>"; };
 		9DB38F4F19986662003948CC /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		9DB38F521998698B003948CC /* ProductCollectionViewCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewCellDelegate.h; sourceTree = "<group>"; };
+		9DB38F53199889FC003948CC /* ProductCollectionViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +220,7 @@
 				9D5BBB241997FE83000E6A51 /* ProductViewController.m */,
 				9D6C359319983FCD00EE0781 /* ProductCollectionViewController.h */,
 				9D6C359419983FCD00EE0781 /* ProductCollectionViewController.m */,
+				9DB38F53199889FC003948CC /* ProductCollectionViewControllerDelegate.h */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

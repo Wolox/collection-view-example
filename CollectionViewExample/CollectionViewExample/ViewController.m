@@ -12,10 +12,13 @@
 #import "ProductViewController.h"
 #import "ProductCollectionViewModel.h"
 #import "ProductCollectionViewController.h"
+#import "ProductCollectionViewControllerDelegate.h"
 
-@interface ViewController ()
+static NSString * const ShowProductSegue = @"ShowProduct";
 
-@property(nonatomic) ProductViewModel * productViewModel;
+@interface ViewController ()<ProductCollectionViewControllerDelegate>
+
+@property(nonatomic) ProductViewModel * selectedProduct;
 @property(nonatomic) ProductCollectionViewController * productCollection;
 
 @end
@@ -24,11 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self initProductCollection];
-    
-    self.showProductButton.enabled = NO;
-    [self fetchProduct];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,10 +36,18 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ShowProduct"]) {
+    if ([segue.identifier isEqualToString:ShowProductSegue]) {
         ProductViewController * controller = segue.destinationViewController;
-        controller.viewModel = self.productViewModel;
+        controller.viewModel = self.selectedProduct;
     }
+}
+
+#pragma mark - ProductCollectionViewController Delegate Methods
+
+- (void)productCollection:(ProductCollectionViewController *)productCollection
+         didSelectProduct:(ProductViewModel *)product {
+    self.selectedProduct = product;
+    [self performSegueWithIdentifier:ShowProductSegue sender:self];
 }
 
 #pragma mark - Private Methods
@@ -53,26 +60,8 @@
 
 - (void)initProductCollection {
     self.productCollection = [self createProductCollectionViewController];
+    self.productCollection.delegate = self;
     [self.productCollectionView addSubview:self.productCollection.view];
-}
-
-- (void)fetchProduct {
-    __block typeof(self) this = self;
-    id<ProductRepository> repository = [[Application sharedInstance] productRepository];
-    NSString * productId = @"1";
-    [repository fetchById:productId withHandler:^(NSError * error, Product * product){
-        if (error) {
-            NSLog(@"Product with ID %@ could not be fetched: %@", productId, error);
-        } else {
-            this.productViewModel = [[ProductViewModel alloc] initWithProduct:product andRepository:repository];
-            MAIN_THREAD(self.showProductButton.enabled = YES);
-        }
-    }];
-}
-
-- (IBAction)showProductCollectionButtonPressed:(id)sender {
-    UIViewController * controller = [self createProductCollectionViewController];
-    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

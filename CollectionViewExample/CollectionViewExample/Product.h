@@ -14,6 +14,7 @@
 @property(readonly, nonatomic) NSString * name;
 @property(readonly, nonatomic) NSUInteger price;
 @property(readonly, nonatomic) NSURL * imageURL;
+@property(readonly, nonatomic) NSString * productDescription;
 @property(nonatomic) BOOL favorited;
 
 - (instancetype)initWithDictionary:(NSDictionary *)attributes;

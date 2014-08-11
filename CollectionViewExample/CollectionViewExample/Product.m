@@ -17,6 +17,7 @@
         _name = attributes[@"name"];
         _price = [attributes[@"price"] unsignedIntegerValue];
         _imageURL = [NSURL URLWithString:attributes[@"image_url"]];
+        _productDescription = attributes[@"description"];
     }
     return self;
 }

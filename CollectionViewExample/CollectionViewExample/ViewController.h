@@ -10,8 +10,6 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *showProductButton;
 @property (weak, nonatomic) IBOutlet UIView *productCollectionView;
-- (IBAction)showProductCollectionButtonPressed:(id)sender;
 
 @end

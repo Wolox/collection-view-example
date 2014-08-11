@@ -63,6 +63,7 @@
     
     self.productNameLabel.text = self.viewModel.name;
     self.productPriceLabel.text = self.viewModel.price;
+    self.productDescriptionTextView.text = self.viewModel.productDescription;
     self.favoriteButton.on = self.viewModel.favorited;
     [self loadProductImage];
 }
@@ -73,7 +74,7 @@
         if (error) {
             NSLog(@"Image could not be loaded: %@", error);
         } else {
-            this.productImageView.image = image;
+            MAIN_THREAD(this.productImageView.image = image);
         }
     }];
 }

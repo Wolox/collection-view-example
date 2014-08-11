@@ -56,7 +56,8 @@
       @"id" : [NSString stringWithFormat:@"%lu", (unsigned long)++self.ids],
       @"name" : [self.names randomObject],
       @"price" : [self.prices randomObject],
-      @"image_url" : [self.imageURLs randomObject]
+      @"image_url" : [self.imageURLs randomObject],
+      @"description" : @"Random description for a random product. I am to lazy to initialize another array :-P"
     };
     return [[Product alloc] initWithDictionary:attributes];
 }

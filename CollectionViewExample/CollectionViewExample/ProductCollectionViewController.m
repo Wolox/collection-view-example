@@ -7,6 +7,7 @@
 //
 
 #import "ProductCollectionViewController.h"
+#import "ProductCollectionViewControllerDelegate.h"
 #import "ProductCollectionViewCell.h"
 #import "ProductCollectionViewCellDelegate.h"
 #import "ProductCollectionViewModel.h"
@@ -64,6 +65,11 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     cell.delegate = self;
     cell.indexPath = indexPath;
     return [self configureCell:cell forProduct:product];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    ProductViewModel * product = [self.viewModel productAtIndex:indexPath.row];
+    [self.delegate productCollection:self didSelectProduct:product];
 }
 
 #pragma mark - ProductCollectionViewCell Delegate Methods

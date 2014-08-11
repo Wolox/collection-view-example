@@ -17,6 +17,7 @@
 @property(readonly, nonatomic) NSString * name;
 @property(readonly, nonatomic) NSString * price;
 @property(readonly, nonatomic) UIImage * image;
+@property(readonly, nonatomic) NSString * productDescription;
 @property(readonly, nonatomic) BOOL favorited;
 
 - (instancetype)initWithProduct:(Product *)product andRepository:(id<ProductRepository>)repository;

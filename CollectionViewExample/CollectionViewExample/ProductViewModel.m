@@ -23,6 +23,7 @@
 @dynamic productId;
 @dynamic name;
 @dynamic favorited;
+@dynamic productDescription;
 
 - (instancetype)initWithProduct:(Product *)product andRepository:(id<ProductRepository>)repository {
     self = [super initWithTargetObject:product];

@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class ProductCollectionViewModel;
+@protocol ProductCollectionViewControllerDelegate;
 
 @interface ProductCollectionViewController : UICollectionViewController
+
+@property(weak, nonatomic) id<ProductCollectionViewControllerDelegate>delegate;
 
 - (instancetype)initWithViewModel:(ProductCollectionViewModel *)viewModel;
 
