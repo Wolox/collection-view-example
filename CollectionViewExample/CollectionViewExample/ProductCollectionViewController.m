@@ -13,7 +13,7 @@
 #import "ProductViewModel.h"
 
 #define CELL_WIDTH 320
-#define CELL_HEIHT 180
+#define CELL_HEIGHT 180
 
 static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 
@@ -29,7 +29,7 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     UICollectionViewFlowLayout * layout = [self createLayoutFlow];
     if (self = [super initWithCollectionViewLayout:layout]) {
         self.viewModel = viewModel;
-        self.view.frame = CGRectMake(0, 0, CELL_WIDTH, CELL_HEIHT);
+        self.view.frame = CGRectMake(0, 0, CELL_WIDTH, CELL_HEIGHT);
     }
     return self;
 }
@@ -103,9 +103,6 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 
 - (void)loadProductImage:(ProductViewModel *)product forCell:(ProductCollectionViewCell *)cell {
     [cell setProductImage:nil];
-    // The index path is stored because inside the block
-    // the cell could be reused and the index path may not be
-    // sameone.
     [product loadImageWithHandler:^(NSError * error, UIImage * image) {
         if (error) {
             NSLog(@"Product image could not be loaded: %@", error);
@@ -123,7 +120,7 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 
 - (UICollectionViewFlowLayout *)createLayoutFlow {
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(CELL_WIDTH, CELL_HEIHT);
+    layout.itemSize = CGSizeMake(CELL_WIDTH, CELL_HEIGHT);
     layout.minimumLineSpacing = 0.0f;
     layout.minimumInteritemSpacing = 0.0f;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
