@@ -1,0 +1,10 @@
+platform :ios, "7.0"
+
+target "CollectionViewExample" do
+  pod 'ObjectiveSugar', '~> 1.1'
+end
+
+target "CollectionViewExampleTests" do
+
+end
+
