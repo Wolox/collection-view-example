@@ -20,6 +20,7 @@ static NSString * const ShowProductSegue = @"ShowProduct";
 
 @property(nonatomic) ProductViewModel * selectedProduct;
 @property(nonatomic) ProductCollectionViewController * productCollection;
+@property(nonatomic) ProductCollectionViewController * favoritedProductCollection;
 
 @end
 
@@ -27,7 +28,7 @@ static NSString * const ShowProductSegue = @"ShowProduct";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initProductCollection];
+    [self initProductCollections];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,13 +56,17 @@ static NSString * const ShowProductSegue = @"ShowProduct";
 - (ProductCollectionViewController *)createProductCollectionViewController {
     id<ProductRepository> repository = [[Application sharedInstance] productRepository];
     ProductCollectionViewModel * viewModel = [[ProductCollectionViewModel alloc] initWithRepository:repository];
-    return [[ProductCollectionViewController alloc] initWithViewModel:viewModel];
+    ProductCollectionViewController * controller = [[ProductCollectionViewController alloc] initWithViewModel:viewModel];
+    controller.delegate = self;
+    return controller;
 }
 
-- (void)initProductCollection {
+- (void)initProductCollections {
     self.productCollection = [self createProductCollectionViewController];
-    self.productCollection.delegate = self;
     [self.productCollectionView addSubview:self.productCollection.view];
+    
+    self.favoritedProductCollection = [self createProductCollectionViewController];
+    [self.favoritedProductsCollectionView addSubview:self.favoritedProductCollection.view];
 }
 
 @end

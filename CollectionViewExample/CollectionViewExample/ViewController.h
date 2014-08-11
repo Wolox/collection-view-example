@@ -11,5 +11,6 @@
 @interface ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIView *productCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *favoritedProductsCollectionView;
 
 @end

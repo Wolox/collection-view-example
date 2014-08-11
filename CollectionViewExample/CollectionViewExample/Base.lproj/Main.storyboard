@@ -16,21 +16,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GbX-Z2-NNY">
-                                <rect key="frame" x="0.0" y="65" width="320" height="180"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GbX-Z2-NNY">
+                                <rect key="frame" x="0.0" y="111" width="320" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XkR-KE-JD8">
+                                <rect key="frame" x="0.0" y="340" width="320" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All the products" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db9-Br-Bal">
+                                <rect key="frame" x="11" y="82" width="121" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favorited products" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSS-rN-lB4">
+                                <rect key="frame" x="11" y="311" width="145" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="GbX-Z2-NNY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="6GC-Vp-EGt"/>
-                            <constraint firstItem="GbX-Z2-NNY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="7Yz-Jw-U5V"/>
-                            <constraint firstItem="GbX-Z2-NNY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Sat-sP-kRr"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AQv-Cj-JWZ"/>
                     <connections>
+                        <outlet property="favoritedProductsCollectionView" destination="XkR-KE-JD8" id="uEA-8r-nzB"/>
                         <outlet property="productCollectionView" destination="GbX-Z2-NNY" id="OqP-ti-GJR"/>
                         <segue destination="AzI-ei-CiK" kind="push" identifier="ShowProduct" id="ZqR-0H-dN5"/>
                     </connections>
