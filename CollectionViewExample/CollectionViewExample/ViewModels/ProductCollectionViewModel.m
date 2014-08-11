@@ -34,9 +34,7 @@
         if (error) {
             handler(error);
         } else {
-            this.products = [products map:^(Product * product) {
-                return [[ProductViewModel alloc] initWithProduct:product andRepository:this.repository];
-            }];
+            this.products = [this decorateProducts:products];
             handler(nil);
         }
     }];
@@ -48,6 +46,15 @@
 
 - (NSUInteger) productsCount {
     return self.products.count;
+}
+
+#pragma mark - Private Methods
+
+- (NSArray *)decorateProducts:(NSArray *)products {
+    __block typeof(self) this = self;
+    return [products map:^(Product * product) {
+        return [[ProductViewModel alloc] initWithProduct:product andRepository:this.repository];
+    }];
 }
 
 @end
