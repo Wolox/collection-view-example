@@ -3,6 +3,12 @@ Collection view example
 
 An iOS project that shows how to use UICollectionView to make re-utilizable components. It also shows how to structure an app using the MVVM pattern.
 
+## About ##
+
+This project is maintained by [Guido Marucci Blas](https://github.com/guidomb) and it was written by [Wolox](http://www.wolox.com.ar).
+
+![Wolox](http://www.wolox.com.ar/images/logo_barra_gris.png)
+
 ## License ##
 
   This project is [lincesed](LICENSE) under the Apache Licesed 2.0.
