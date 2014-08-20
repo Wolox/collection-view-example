@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00D6A54AAB1A47EFB11CB139 /* libPods-CollectionViewExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143085CB097948B397B0A702 /* libPods-CollectionViewExample.a */; };
+		9D32B65019A53CBD009526A9 /* ProductViewModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D32B64F19A53CBD009526A9 /* ProductViewModelSpec.m */; };
 		9D3CCC561998B09200A464C0 /* FetchAllProductFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3CCC551998B09200A464C0 /* FetchAllProductFetcher.m */; };
 		9D3CCC591998B24400A464C0 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3CCC581998B24400A464C0 /* MainViewModel.m */; };
 		9D3CCC5C1998BAA800A464C0 /* FavoriteProductFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3CCC5B1998BAA800A464C0 /* FavoriteProductFetcher.m */; };
@@ -37,7 +38,6 @@
 		9D6C359519983FCD00EE0781 /* ProductCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C359419983FCD00EE0781 /* ProductCollectionViewController.m */; };
 		9D6C35991998425E00EE0781 /* ProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C35981998425E00EE0781 /* ProductCollectionViewCell.m */; };
 		9D6C35A1199846F100EE0781 /* ProductCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C35A0199846F100EE0781 /* ProductCollectionViewModel.m */; };
-		9DA21DF519A4EDCE00FAA6E3 /* SampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA21DF419A4EDCE00FAA6E3 /* SampleSpec.m */; };
 		9DB38F5019986662003948CC /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB38F4F19986662003948CC /* ProductCollectionViewCell.xib */; };
 		D43AF5815FA5456AA555FB15 /* libPods-CollectionViewExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65CF731E267D496FAAF5A3E5 /* libPods-CollectionViewExampleTests.a */; };
 /* End PBXBuildFile section */
@@ -57,6 +57,7 @@
 		4E83F29026FD42C7A09415D9 /* Pods-CollectionViewExampleTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewExampleTests.xcconfig"; path = "Pods/Pods-CollectionViewExampleTests.xcconfig"; sourceTree = "<group>"; };
 		65CF731E267D496FAAF5A3E5 /* libPods-CollectionViewExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectionViewExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FEAE9FC9BB041C29BBBDC85 /* Pods-CollectionViewExample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewExample.xcconfig"; path = "Pods/Pods-CollectionViewExample.xcconfig"; sourceTree = "<group>"; };
+		9D32B64F19A53CBD009526A9 /* ProductViewModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductViewModelSpec.m; sourceTree = "<group>"; };
 		9D3CCC531998B06200A464C0 /* ProductFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductFetcher.h; sourceTree = "<group>"; };
 		9D3CCC541998B09200A464C0 /* FetchAllProductFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchAllProductFetcher.h; sourceTree = "<group>"; };
 		9D3CCC551998B09200A464C0 /* FetchAllProductFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchAllProductFetcher.m; sourceTree = "<group>"; };
@@ -109,7 +110,6 @@
 		9D6C35981998425E00EE0781 /* ProductCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewCell.m; sourceTree = "<group>"; };
 		9D6C359F199846F100EE0781 /* ProductCollectionViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewModel.h; sourceTree = "<group>"; };
 		9D6C35A0199846F100EE0781 /* ProductCollectionViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewModel.m; sourceTree = "<group>"; };
-		9DA21DF419A4EDCE00FAA6E3 /* SampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSpec.m; sourceTree = "<group>"; };
 		9DB38F4F19986662003948CC /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		9DB38F521998698B003948CC /* ProductCollectionViewCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewCellDelegate.h; sourceTree = "<group>"; };
 		9DB38F53199889FC003948CC /* ProductCollectionViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -141,6 +141,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D32B64C19A532A6009526A9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9D32B64F19A53CBD009526A9 /* ProductViewModelSpec.m */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
 		9D5BBAE21997FD8D000E6A51 = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +220,7 @@
 		9D5BBB131997FD8D000E6A51 /* CollectionViewExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				9DA21DF419A4EDCE00FAA6E3 /* SampleSpec.m */,
+				9D32B64C19A532A6009526A9 /* ViewModels */,
 				9D5BBB141997FD8D000E6A51 /* Supporting Files */,
 			);
 			path = CollectionViewExampleTests;
@@ -534,7 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DA21DF519A4EDCE00FAA6E3 /* SampleSpec.m in Sources */,
+				9D32B65019A53CBD009526A9 /* ProductViewModelSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

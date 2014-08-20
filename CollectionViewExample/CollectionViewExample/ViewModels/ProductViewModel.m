@@ -30,14 +30,20 @@ NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNoti
 @dynamic favorited;
 @dynamic productDescription;
 
-- (instancetype)initWithProduct:(Product *)product andRepository:(id<ProductRepository>)repository {
+- (instancetype)initWithProduct:(Product *)product
+                     repository:(id<ProductRepository>)repository
+          andNotificationCenter:(NSNotificationCenter *)notificationCenter {
     self = [super initWithTargetObject:product];
     if (self) {
         _product = product;
         _repository = repository;
-        _notificationCenter = [NSNotificationCenter defaultCenter];
+        _notificationCenter = notificationCenter;
     }
     return self;
+}
+
+- (instancetype)initWithProduct:(Product *)product andRepository:(id<ProductRepository>)repository {
+    return [self initWithProduct:product repository:repository andNotificationCenter:[NSNotificationCenter defaultCenter]];
 }
 
 - (NSString *)price {
@@ -58,6 +64,7 @@ NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNoti
 - (void)setFavorited:(BOOL)favorited withHandler:(void(^)(NSError *))handler {
     if (favorited == self.product.favorited) {
         handler(nil);
+        return;
     }
     
     self.product.favorited = favorited;

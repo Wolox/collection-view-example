@@ -27,6 +27,10 @@ extern NSString * const ProductViewModelNotificationProductKey;
 
 - (instancetype)initWithProduct:(Product *)product andRepository:(id<ProductRepository>)repository;
 
+- (instancetype)initWithProduct:(Product *)product
+                     repository:(id<ProductRepository>)repository
+          andNotificationCenter:(NSNotificationCenter *)notificationCenter;
+
 - (void)loadImageWithHandler:(ImageHandler)handler;
 
 - (void)setFavorited:(BOOL)favorited withHandler:(void(^)(NSError *))handler;
