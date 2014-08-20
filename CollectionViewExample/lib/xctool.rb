@@ -10,6 +10,12 @@ class XCTool
     install
   )
 
+  DEFAULT_ACTION_ARGUMENTS = {
+    'test' => {
+      'sdk' => 'iphonesimulator'
+    }
+  }
+
   XCTOOL_CMD = "xctool"
 
   class << self
@@ -35,8 +41,9 @@ class XCTool
 
   def run(action, arguments = {}, options = {})
     if valid_action?(action)
-      opts = default_base_options.merge(options)
-      command = build_command(action, arguments, opts)
+      options = default_base_options.merge(options)
+      arguments = DEFAULT_ACTION_ARGUMENTS.fetch(action, {}).merge(arguments)
+      command = build_command(action, arguments, options)
       execute(command)
     else
       raise "Invalid action #{action}"
