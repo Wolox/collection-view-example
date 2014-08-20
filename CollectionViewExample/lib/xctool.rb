@@ -4,6 +4,7 @@ class XCTool
     clean
     build
     build-tests
+    test
     archive
     analyze
     install
