@@ -5,16 +5,7 @@ WORKSPACE = "#{PROJECT}.xcworkspace"
 SCHEME = PROJECT
 
 namespace :xctool do
-  %w(
-    clean
-    build
-    build-tests
-    run-tests
-    test
-    archive
-    analyze
-    install
-  ).each do |action|
+  XCTool::ACTIONS.each do |action|
     desc "Runs xctool's #{action} action"
     task action do
       xctool.send(action)
@@ -23,5 +14,8 @@ namespace :xctool do
 end
 
 def xctool
-  @xctool ||= XCTool.new(WORKSPACE, SCHEME)
+  @xctool ||= XCTool.new(WORKSPACE, SCHEME, {
+    dry_run: ENV['DRY_RUN'] == 'true',
+    verbose: ENV['VERBOSE'] == 'true'
+  })
 end
