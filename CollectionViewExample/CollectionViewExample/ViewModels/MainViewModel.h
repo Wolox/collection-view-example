@@ -19,8 +19,4 @@
 
 - (void)loadWithErrorHandler:(void(^)(NSError *))handler;
 
-- (void)registerNotificationHandlers;
-
-- (void)unregisterNotificationHandlers;
-
 @end

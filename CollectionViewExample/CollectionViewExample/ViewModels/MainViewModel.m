@@ -31,8 +31,13 @@
         _productsViewModel = [[ProductCollectionViewModel alloc] initWithRepository:self.repository];
         _favoriteProductsViewModel = [[ProductCollectionViewModel alloc] initWithRepository:self.repository];
         _favoriteProductsViewModel.productFetcher = [[FavoriteProductFetcher alloc] initWithRepository:self.repository];
+        [self registerNotificationHandlers];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self unregisterNotificationHandlers];
 }
 
 - (void)loadWithErrorHandler:(void(^)(NSError *))handler {
@@ -41,6 +46,8 @@
         [self.favoriteProductsViewModel loadWithErrorHandler:handler];
     }
 }
+
+#pragma mark - Private Methods
 
 - (void)registerNotificationHandlers {
     [self.notificationCenter addObserver:self
@@ -57,8 +64,6 @@
     [self.notificationCenter removeObserver:self name:ProductCollectionViewModelResetNotification object:nil];
     [self.notificationCenter removeObserver:self name:ProductViewModelProductFavoriteChangedNotification object:nil];
 }
-
-#pragma mark - Private Methods
 
 - (void)markAsLoaded {
     self.loaded = YES;

@@ -50,6 +50,7 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self.collectionView reloadData];
     [self registerCollectionResetNotificationHandler];
 }
 

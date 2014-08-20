@@ -32,14 +32,6 @@ static NSString * const ShowProductSegue = @"ShowProduct";
     [self initChildControllers];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self.viewModel registerNotificationHandlers];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.viewModel unregisterNotificationHandlers];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [self.viewModel loadWithErrorHandler:^(NSError * error) {
         if (error) {
