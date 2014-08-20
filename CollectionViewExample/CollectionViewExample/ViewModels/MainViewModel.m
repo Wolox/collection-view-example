@@ -25,8 +25,8 @@
 - (instancetype)initWithRepository:(id<ProductRepository>)repository {
     self = [super init];
     if (self) {
-        self.repository = repository;
-        self.notificationCenter = [NSNotificationCenter defaultCenter];
+        _repository = repository;
+        _notificationCenter = [NSNotificationCenter defaultCenter];
         _loaded = NO;
         _productsViewModel = [[ProductCollectionViewModel alloc] initWithRepository:self.repository];
         _favoriteProductsViewModel = [[ProductCollectionViewModel alloc] initWithRepository:self.repository];

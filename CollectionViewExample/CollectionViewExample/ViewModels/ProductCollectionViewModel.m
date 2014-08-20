@@ -37,9 +37,9 @@ NSString * const ProductCollectionViewModelNotificationProductKey = @"ProductCol
     self = [super init];
     if (self) {
         _products = [self decorateProducts:products];
-        self.repository = repository;
-        self.notificationCenter = [NSNotificationCenter defaultCenter];
-        self.productFetcher = [[FetchAllProductFetcher alloc] initWithRepository:repository];
+        _repository = repository;
+        _notificationCenter = [NSNotificationCenter defaultCenter];
+        _productFetcher = [[FetchAllProductFetcher alloc] initWithRepository:repository];
     }
     return self;
 }

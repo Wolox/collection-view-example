@@ -23,7 +23,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.productRepository = [[InMemoryProductRepository alloc] init];
+        _productRepository = [[InMemoryProductRepository alloc] init];
     }
     return self;
 }

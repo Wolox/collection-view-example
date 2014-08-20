@@ -20,7 +20,7 @@
 - (instancetype)initWithRepository:(id<ProductRepository>)repository {
     self = [super init];
     if (self) {
-        self.repository = repository;
+        _repository = repository;
     }
     return self;
 }

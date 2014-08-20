@@ -32,18 +32,18 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.ids = 0;
-        self.imageURLs = @[
+        _ids = 0;
+        _imageURLs = @[
             @"http://www.botasdejugadores.com/wp-content/uploads/2014/03/nike-tiempo-legend-5-rojas-blancas-51.jpg",
             @"http://2.bp.blogspot.com/-R0T0bXmBCOE/UjbNV9n91aI/AAAAAAAAJHQ/nqg2eNQALZQ/s738/NikeTiempo-Legend-Hi-Vis-Boot-2.jpg",
             @"http://www.yourmomhatesthis.com/images/Dc-Shoes-1a4.png"
         ];
-        self.names = @[
+        _names = @[
             @"Botines Nike Tiempo",
             @"Botines Nike T90",
             @"Zapatillas"
         ];
-        self.prices = @[
+        _prices = @[
             @(70000),
             @(54999)
         ];
