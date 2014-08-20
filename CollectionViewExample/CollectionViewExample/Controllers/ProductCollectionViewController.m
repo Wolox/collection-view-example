@@ -32,12 +32,12 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 - (instancetype)initWithViewModel:(ProductCollectionViewModel *)viewModel {
     UICollectionViewFlowLayout * layout = [self createLayoutFlow];
     if (self = [super initWithCollectionViewLayout:layout]) {
-        self.viewModel = viewModel;
+        _viewModel = viewModel;
+        _notificationCenter = [NSNotificationCenter defaultCenter];
         // This should not be necesary if we use autolayout but
         // we are not using it because is not necesary for this
         // example app. Yet.
         self.view.frame = CGRectMake(0, 0, CELL_WIDTH, CELL_HEIGHT);
-        self.notificationCenter = [NSNotificationCenter defaultCenter];
     }
     return self;
 }
