@@ -84,6 +84,10 @@ NSString * const ProductCollectionViewModelNotificationProductKey = @"ProductCol
     return _products.count;
 }
 
+- (NSUInteger)indexOfProductViewModel:(ProductViewModel *)productViewModel {
+    return [_products indexOfObject:productViewModel];
+}
+
 #pragma mark - Private Methods
 
 - (NSMutableArray *)decorateProducts:(NSArray *)products {

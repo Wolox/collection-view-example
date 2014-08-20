@@ -114,11 +114,26 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
                                                               object:self.viewModel
                                                                queue:[NSOperationQueue mainQueue]
                                                           usingBlock:handler];
+    [self.notificationCenter addObserver:self
+                                selector:@selector(handleProductFavoritePropertyChange:)
+                                    name:ProductViewModelProductFavoriteChangedNotification
+                                  object:nil];
 }
 
 - (void)unregisterCollectionResetNotificationHandler {
     [self.notificationCenter removeObserver:self.resetObserver];
     [self.notificationCenter removeObserver:self.changedObserver];
+    [self.notificationCenter removeObserver:self name:ProductViewModelProductFavoriteChangedNotification object:nil];
+}
+
+- (void)handleProductFavoritePropertyChange:(NSNotification *)notification {
+    ProductViewModel * productViewModel = notification.userInfo[ProductViewModelNotificationProductKey];
+    NSUInteger index = [self.viewModel indexOfProductViewModel:productViewModel];
+    NSIndexPath * indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    ProductCollectionViewCell * cell = (ProductCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    if (cell) {
+        MAIN_THREAD(cell.favoriteButton.on = productViewModel.favorited);
+    }
 }
 
 - (ProductCollectionViewCell *)configureCell:(ProductCollectionViewCell *)cell forProduct:(ProductViewModel *)product {

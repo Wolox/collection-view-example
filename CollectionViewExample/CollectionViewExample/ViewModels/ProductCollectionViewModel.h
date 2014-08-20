@@ -40,4 +40,6 @@ extern NSString * const ProductCollectionViewModelNotificationProductKey;
 
 - (NSUInteger) productsCount;
 
+- (NSUInteger)indexOfProductViewModel:(ProductViewModel *)productViewModel;
+
 @end
