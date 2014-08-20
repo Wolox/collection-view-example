@@ -13,6 +13,8 @@ namespace :xctool do
   end
 end
 
+task default: 'xctool:test'
+
 def xctool
   @xctool ||= XCTool.new(WORKSPACE, SCHEME, {
     dry_run: ENV['DRY_RUN'] == 'true',
