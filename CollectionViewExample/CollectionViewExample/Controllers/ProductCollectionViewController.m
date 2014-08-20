@@ -103,8 +103,8 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 - (void)registerCollectionResetNotificationHandler {
     __block typeof(self) this = self;
     void(^handler)(NSNotification *) = ^(NSNotification * note) {
-        MAIN_THREAD([this.collectionView reloadData]);
-    };;
+        [this.collectionView reloadData];
+    };
     self.resetObserver = [self.notificationCenter addObserverForName:ProductCollectionViewModelResetNotification
                                                               object:self.viewModel
                                                                queue:[NSOperationQueue mainQueue]
