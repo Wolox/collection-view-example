@@ -24,7 +24,6 @@
 		9D5BBB0F1997FD8D000E6A51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5BBAEE1997FD8D000E6A51 /* Foundation.framework */; };
 		9D5BBB101997FD8D000E6A51 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5BBAF21997FD8D000E6A51 /* UIKit.framework */; };
 		9D5BBB181997FD8D000E6A51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9D5BBB161997FD8D000E6A51 /* InfoPlist.strings */; };
-		9D5BBB1A1997FD8D000E6A51 /* CollectionViewExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB191997FD8D000E6A51 /* CollectionViewExampleTests.m */; };
 		9D5BBB251997FE83000E6A51 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB241997FE83000E6A51 /* ProductViewController.m */; };
 		9D5BBB2A1997FF94000E6A51 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB291997FF94000E6A51 /* Product.m */; };
 		9D5BBB3519980A63000E6A51 /* Delegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBB3419980A63000E6A51 /* Delegator.m */; };
@@ -38,7 +37,9 @@
 		9D6C359519983FCD00EE0781 /* ProductCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C359419983FCD00EE0781 /* ProductCollectionViewController.m */; };
 		9D6C35991998425E00EE0781 /* ProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C35981998425E00EE0781 /* ProductCollectionViewCell.m */; };
 		9D6C35A1199846F100EE0781 /* ProductCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C35A0199846F100EE0781 /* ProductCollectionViewModel.m */; };
+		9DA21DF519A4EDCE00FAA6E3 /* SampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA21DF419A4EDCE00FAA6E3 /* SampleSpec.m */; };
 		9DB38F5019986662003948CC /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB38F4F19986662003948CC /* ProductCollectionViewCell.xib */; };
+		D43AF5815FA5456AA555FB15 /* libPods-CollectionViewExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65CF731E267D496FAAF5A3E5 /* libPods-CollectionViewExampleTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		143085CB097948B397B0A702 /* libPods-CollectionViewExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectionViewExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E83F29026FD42C7A09415D9 /* Pods-CollectionViewExampleTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewExampleTests.xcconfig"; path = "Pods/Pods-CollectionViewExampleTests.xcconfig"; sourceTree = "<group>"; };
+		65CF731E267D496FAAF5A3E5 /* libPods-CollectionViewExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectionViewExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FEAE9FC9BB041C29BBBDC85 /* Pods-CollectionViewExample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewExample.xcconfig"; path = "Pods/Pods-CollectionViewExample.xcconfig"; sourceTree = "<group>"; };
 		9D3CCC531998B06200A464C0 /* ProductFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductFetcher.h; sourceTree = "<group>"; };
 		9D3CCC541998B09200A464C0 /* FetchAllProductFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchAllProductFetcher.h; sourceTree = "<group>"; };
@@ -79,7 +82,6 @@
 		9D5BBB0D1997FD8D000E6A51 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9D5BBB151997FD8D000E6A51 /* CollectionViewExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CollectionViewExampleTests-Info.plist"; sourceTree = "<group>"; };
 		9D5BBB171997FD8D000E6A51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9D5BBB191997FD8D000E6A51 /* CollectionViewExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewExampleTests.m; sourceTree = "<group>"; };
 		9D5BBB231997FE83000E6A51 /* ProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductViewController.h; sourceTree = "<group>"; };
 		9D5BBB241997FE83000E6A51 /* ProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductViewController.m; sourceTree = "<group>"; };
 		9D5BBB281997FF94000E6A51 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		9D6C35981998425E00EE0781 /* ProductCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewCell.m; sourceTree = "<group>"; };
 		9D6C359F199846F100EE0781 /* ProductCollectionViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewModel.h; sourceTree = "<group>"; };
 		9D6C35A0199846F100EE0781 /* ProductCollectionViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewModel.m; sourceTree = "<group>"; };
+		9DA21DF419A4EDCE00FAA6E3 /* SampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSpec.m; sourceTree = "<group>"; };
 		9DB38F4F19986662003948CC /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		9DB38F521998698B003948CC /* ProductCollectionViewCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewCellDelegate.h; sourceTree = "<group>"; };
 		9DB38F53199889FC003948CC /* ProductCollectionViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 				9D5BBB0E1997FD8D000E6A51 /* XCTest.framework in Frameworks */,
 				9D5BBB101997FD8D000E6A51 /* UIKit.framework in Frameworks */,
 				9D5BBB0F1997FD8D000E6A51 /* Foundation.framework in Frameworks */,
+				D43AF5815FA5456AA555FB15 /* libPods-CollectionViewExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +149,7 @@
 				9D5BBAED1997FD8D000E6A51 /* Frameworks */,
 				9D5BBAEC1997FD8D000E6A51 /* Products */,
 				6FEAE9FC9BB041C29BBBDC85 /* Pods-CollectionViewExample.xcconfig */,
+				4E83F29026FD42C7A09415D9 /* Pods-CollectionViewExampleTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +170,7 @@
 				9D5BBAF21997FD8D000E6A51 /* UIKit.framework */,
 				9D5BBB0D1997FD8D000E6A51 /* XCTest.framework */,
 				143085CB097948B397B0A702 /* libPods-CollectionViewExample.a */,
+				65CF731E267D496FAAF5A3E5 /* libPods-CollectionViewExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,7 +212,7 @@
 		9D5BBB131997FD8D000E6A51 /* CollectionViewExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				9D5BBB191997FD8D000E6A51 /* CollectionViewExampleTests.m */,
+				9DA21DF419A4EDCE00FAA6E3 /* SampleSpec.m */,
 				9D5BBB141997FD8D000E6A51 /* Supporting Files */,
 			);
 			path = CollectionViewExampleTests;
@@ -363,9 +369,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D5BBB201997FD8D000E6A51 /* Build configuration list for PBXNativeTarget "CollectionViewExampleTests" */;
 			buildPhases = (
+				5AEF8A562B8E45618CCA6A00 /* Check Pods Manifest.lock */,
 				9D5BBB081997FD8D000E6A51 /* Sources */,
 				9D5BBB091997FD8D000E6A51 /* Frameworks */,
 				9D5BBB0A1997FD8D000E6A51 /* Resources */,
+				89E55926E7D34813BB9CA1C5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -433,6 +441,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5AEF8A562B8E45618CCA6A00 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		89E55926E7D34813BB9CA1C5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-CollectionViewExampleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F0B40F43078D496D9FF18A6E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -496,7 +534,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D5BBB1A1997FD8D000E6A51 /* CollectionViewExampleTests.m in Sources */,
+				9DA21DF519A4EDCE00FAA6E3 /* SampleSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +676,7 @@
 		};
 		9D5BBB211997FD8D000E6A51 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E83F29026FD42C7A09415D9 /* Pods-CollectionViewExampleTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CollectionViewExample.app/CollectionViewExample";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -660,6 +699,7 @@
 		};
 		9D5BBB221997FD8D000E6A51 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E83F29026FD42C7A09415D9 /* Pods-CollectionViewExampleTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CollectionViewExample.app/CollectionViewExample";
 				FRAMEWORK_SEARCH_PATHS = (

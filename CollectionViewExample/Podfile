@@ -4,7 +4,7 @@ target "CollectionViewExample" do
   pod 'ObjectiveSugar', '~> 1.1'
 end
 
-target "CollectionViewExampleTests" do
-
+target "CollectionViewExampleTests", exclusive: true do
+  pod 'Kiwi'
 end
 
