@@ -33,6 +33,9 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     UICollectionViewFlowLayout * layout = [self createLayoutFlow];
     if (self = [super initWithCollectionViewLayout:layout]) {
         self.viewModel = viewModel;
+        // This should not be necesary if we use autolayout but
+        // we are not using it because is not necesary for this
+        // example app. Yet.
         self.view.frame = CGRectMake(0, 0, CELL_WIDTH, CELL_HEIGHT);
         self.notificationCenter = [NSNotificationCenter defaultCenter];
     }
@@ -149,8 +152,7 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     layout.minimumLineSpacing = 0.0f;
     layout.minimumInteritemSpacing = 0.0f;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    // TODO Remove this hardcoded inset value!
-    layout.sectionInset = UIEdgeInsetsMake(-65, 0, 0, 0);
+    layout.sectionInset = UIEdgeInsetsZero;
     return layout;
 }
 
