@@ -74,6 +74,7 @@ static NSString * const ShowProductSegue = @"ShowProduct";
     ProductCollectionViewController * controller = [[ProductCollectionViewController alloc] initWithViewModel:viewModel];
     controller.delegate = self;
     [self addChildViewController:controller];
+    [controller didMoveToParentViewController:self];
     return controller;
 }
 
