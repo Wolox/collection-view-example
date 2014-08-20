@@ -1,0 +1,27 @@
+require './lib/xctool'
+
+PROJECT = 'CollectionViewExample'
+WORKSPACE = "#{PROJECT}.xcworkspace" 
+SCHEME = PROJECT
+
+namespace :xctool do
+  %w(
+    clean
+    build
+    build-tests
+    run-tests
+    test
+    archive
+    analyze
+    install
+  ).each do |action|
+    desc "Runs xctool's #{action} action"
+    task action do
+      xctool.send(action)
+    end
+  end
+end
+
+def xctool
+  @xctool ||= XCTool.new(WORKSPACE, SCHEME)
+end
