@@ -60,10 +60,12 @@ NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNoti
         handler(nil);
     }
     
+    self.product.favorited = favorited;
+    [self notifyProductFavoritePropertyChanged];
     __block typeof(self) this = self;
     [self.repository favoriteProductWithId:self.product.productId withHandler:^(NSError * error) {
-        if (!error) {
-            this.product.favorited = favorited;
+        if (error) {
+            this.product.favorited = !favorited;
             [self notifyProductFavoritePropertyChanged];
         }
         handler(error);
