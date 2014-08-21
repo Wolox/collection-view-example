@@ -50,11 +50,19 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    // This collection reload forces the collection
+    // view to sync with the collection view model
+    // because other objects could have modified
+    // the collection and the state of each of the
+    // stored view models.
     [self.collectionView reloadData];
     [self registerNotificationHandlers];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    // Unregistration is done when the
+    // view will disappear to avoid compuntation
+    // that is not needed.
     [self unregisterNotificationHandlers];
 }
 
