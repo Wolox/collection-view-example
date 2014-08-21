@@ -64,9 +64,7 @@ NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNoti
     [self.repository favoriteProductWithId:self.product.productId withHandler:^(NSError * error) {
         if (!error) {
             this.product.favorited = favorited;
-            [this.notificationCenter postNotificationName:ProductViewModelProductFavoriteChangedNotification
-                                                   object:this
-                                                 userInfo:@{ProductViewModelNotificationProductKey:this}];
+            [self notifyProductFavoritePropertyChanged];
         }
         handler(error);
     }];
@@ -88,6 +86,12 @@ NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNoti
         }
         handler(error, self.image);
     }];
+}
+
+- (void)notifyProductFavoritePropertyChanged {
+    [self.notificationCenter postNotificationName:ProductViewModelProductFavoriteChangedNotification
+                                           object:self
+                                         userInfo:@{ProductViewModelNotificationProductKey:self}];
 }
 
 @end
