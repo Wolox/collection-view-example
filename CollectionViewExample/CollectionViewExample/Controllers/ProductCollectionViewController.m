@@ -136,8 +136,12 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 
 - (ProductCollectionViewCell *)cellForProductViewModel:(ProductViewModel *)productViewModel {
     NSUInteger index = [self.viewModel indexOfProductViewModel:productViewModel];
-    NSIndexPath * indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    return (ProductCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    ProductCollectionViewCell * cell = nil;
+    if (index != NSNotFound) {
+        NSIndexPath * indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+        cell = (ProductCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    }
+    return cell;
 }
 
 - (ProductCollectionViewCell *)configureCell:(ProductCollectionViewCell *)cell forProduct:(ProductViewModel *)product {
