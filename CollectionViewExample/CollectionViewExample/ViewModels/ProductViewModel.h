@@ -11,7 +11,7 @@
 
 @class Product;
 
-extern NSString * const ProductViewModelProductFavoriteChangedNotification;
+extern NSString * const ProductViewModelProductFavoritePropertyChangedNotification;
 
 extern NSString * const ProductViewModelNotificationProductKey;
 

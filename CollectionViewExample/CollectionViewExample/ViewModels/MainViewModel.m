@@ -56,13 +56,13 @@
                                   object:nil];
     [self.notificationCenter addObserver:self
                                 selector:@selector(handleFavoriteNotification:)
-                                    name:ProductViewModelProductFavoriteChangedNotification
+                                    name:ProductViewModelProductFavoritePropertyChangedNotification
                                   object:nil];
 }
 
 - (void)unregisterNotificationHandlers {
     [self.notificationCenter removeObserver:self name:ProductCollectionViewModelResetNotification object:nil];
-    [self.notificationCenter removeObserver:self name:ProductViewModelProductFavoriteChangedNotification object:nil];
+    [self.notificationCenter removeObserver:self name:ProductViewModelProductFavoritePropertyChangedNotification object:nil];
 }
 
 - (void)markAsLoaded {

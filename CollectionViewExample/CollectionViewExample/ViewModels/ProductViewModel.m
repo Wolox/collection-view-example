@@ -10,7 +10,7 @@
 #import "Product.h"
 #import "ProductRepository.h"
 
-NSString * const ProductViewModelProductFavoriteChangedNotification = @"ProductViewModelNotification.Keys.ProductFavoriteChanged";
+NSString * const ProductViewModelProductFavoritePropertyChangedNotification = @"ProductViewModelNotification.Keys.ProductFavoriteChanged";
 
 NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNotification.Keys.Product";
 
@@ -89,7 +89,7 @@ NSString * const ProductViewModelNotificationProductKey = @"ProductViewModelNoti
 }
 
 - (void)notifyProductFavoritePropertyChanged {
-    [self.notificationCenter postNotificationName:ProductViewModelProductFavoriteChangedNotification
+    [self.notificationCenter postNotificationName:ProductViewModelProductFavoritePropertyChangedNotification
                                            object:self
                                          userInfo:@{ProductViewModelNotificationProductKey:self}];
 }

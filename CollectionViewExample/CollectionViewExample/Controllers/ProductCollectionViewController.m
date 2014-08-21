@@ -116,13 +116,13 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     };
     [self registerCollectionResetNotificationHandler:handler];
     [self registerCollectionChangedNotificationHandler:handler];
-    [self registerProductFavoriteChangedNotificationHandler];
+    [self registerProductFavoritePropertyChangedNotificationHandler];
 }
 
 - (void)unregisterNotificationHandlers {
     [self unregisterCollectionResetNotificationHandler];
     [self unregisterCollectionChangedNotificationHandler];
-    [self unregisterProductFavoriteChangedNotificationHandler];
+    [self unregisterProductFavoritePropertyChangedNotificationHandler];
 }
 
 - (void)registerCollectionResetNotificationHandler:(void(^)(NSNotification *))handler {
@@ -147,15 +147,17 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
     [self.notificationCenter removeObserver:self.changedObserver];
 }
 
-- (void)registerProductFavoriteChangedNotificationHandler {
+- (void)registerProductFavoritePropertyChangedNotificationHandler {
     [self.notificationCenter addObserver:self
                                 selector:@selector(handleProductFavoritePropertyChange:)
-                                    name:ProductViewModelProductFavoriteChangedNotification
+                                    name:ProductViewModelProductFavoritePropertyChangedNotification
                                   object:nil];
 }
 
-- (void)unregisterProductFavoriteChangedNotificationHandler {
-    [self.notificationCenter removeObserver:self name:ProductViewModelProductFavoriteChangedNotification object:nil];
+- (void)unregisterProductFavoritePropertyChangedNotificationHandler {
+    [self.notificationCenter removeObserver:self
+                                       name:ProductViewModelProductFavoritePropertyChangedNotification
+                                     object:nil];
 }
 
 - (void)handleProductFavoritePropertyChange:(NSNotification *)notification {
