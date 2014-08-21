@@ -51,11 +51,11 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.collectionView reloadData];
-    [self registerCollectionResetNotificationHandler];
+    [self registerNotificationHandlers];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self unregisterCollectionResetNotificationHandler];
+    [self unregisterNotificationHandlers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,28 +101,52 @@ static NSString * const CellIdentifier = @"ProductCollectionViewCell";
 
 #pragma mark - Private Methods
 
-- (void)registerCollectionResetNotificationHandler {
+- (void)registerNotificationHandlers {
     __block typeof(self) this = self;
     void(^handler)(NSNotification *) = ^(NSNotification * note) {
         [this.collectionView reloadData];
     };
+    [self registerCollectionResetNotificationHandler:handler];
+    [self registerCollectionChangedNotificationHandler:handler];
+    [self registerProductFavoriteChangedNotificationHandler];
+}
+
+- (void)unregisterNotificationHandlers {
+    [self unregisterCollectionResetNotificationHandler];
+    [self unregisterCollectionChangedNotificationHandler];
+    [self unregisterProductFavoriteChangedNotificationHandler];
+}
+
+- (void)registerCollectionResetNotificationHandler:(void(^)(NSNotification *))handler {
     self.resetObserver = [self.notificationCenter addObserverForName:ProductCollectionViewModelResetNotification
                                                               object:self.viewModel
                                                                queue:[NSOperationQueue mainQueue]
                                                           usingBlock:handler];
+}
+
+- (void)unregisterCollectionResetNotificationHandler {
+    [self.notificationCenter removeObserver:self.resetObserver];
+}
+
+- (void)registerCollectionChangedNotificationHandler:(void(^)(NSNotification *))handler {
     self.changedObserver = [self.notificationCenter addObserverForName:ProductCollectionViewModelChangedNotification
-                                                              object:self.viewModel
-                                                               queue:[NSOperationQueue mainQueue]
-                                                          usingBlock:handler];
+                                                                object:self.viewModel
+                                                                 queue:[NSOperationQueue mainQueue]
+                                                            usingBlock:handler];
+}
+
+- (void)unregisterCollectionChangedNotificationHandler {
+    [self.notificationCenter removeObserver:self.changedObserver];
+}
+
+- (void)registerProductFavoriteChangedNotificationHandler {
     [self.notificationCenter addObserver:self
                                 selector:@selector(handleProductFavoritePropertyChange:)
                                     name:ProductViewModelProductFavoriteChangedNotification
                                   object:nil];
 }
 
-- (void)unregisterCollectionResetNotificationHandler {
-    [self.notificationCenter removeObserver:self.resetObserver];
-    [self.notificationCenter removeObserver:self.changedObserver];
+- (void)unregisterProductFavoriteChangedNotificationHandler {
     [self.notificationCenter removeObserver:self name:ProductViewModelProductFavoriteChangedNotification object:nil];
 }
 
