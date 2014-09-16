@@ -1,23 +1,24 @@
-require './lib/xctool'
+require './lib/xcodebuild'
 
 PROJECT = 'CollectionViewExample'
 WORKSPACE = "#{PROJECT}.xcworkspace" 
 SCHEME = PROJECT
 
-namespace :xctool do
-  XCTool::ACTIONS.each do |action|
-    desc "Runs xctool's #{action} action"
+namespace :xcode do
+  XCodeBuild::ACTIONS.each do |action|
+    desc "Runs xcodebuild's #{action} action"
     task action do
-      xctool.send(action)
+      xcodebuild.send(action)
     end
   end
 end
 
-task default: 'xctool:test'
+task default: 'xcode:test'
 
-def xctool
-  @xctool ||= XCTool.new(WORKSPACE, SCHEME, {
+def xcodebuild
+  @xcodebuild ||= XCodeBuild.new(WORKSPACE, SCHEME, {
     dry_run: ENV['DRY_RUN'] == 'true',
-    verbose: ENV['VERBOSE'] == 'true'
+    verbose: ENV['VERBOSE'] == 'true',
+    pretty: !(ENV['DISABLE_XCPRETTY'] == 'true')
   })
 end

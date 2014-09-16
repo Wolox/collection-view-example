@@ -1,4 +1,4 @@
-class XCTool
+class XCodeBuild
 
   ACTIONS = %w(
     clean
@@ -16,8 +16,6 @@ class XCTool
     }
   }
 
-  XCTOOL_CMD = "xctool"
-
   class << self
 
     def to_action_method_name(action)
@@ -28,15 +26,19 @@ class XCTool
 
   end
 
-  attr_reader :workspace, :scheme, :xctool_path
+  attr_reader :workspace, :scheme
 
   def initialize(workspace, scheme, opts = {})
     @workspace = workspace
     @scheme = scheme
-    @xctool_path = Pathname.new(opts[:xctool_path] || "")
-    opts = {verbose: false, dry_run: false}.merge(opts)
+    opts = {verbose: false, dry_run: false, pretty: true}.merge(opts)
+    @pretty = opts[:pretty]
     @verbose = opts[:verbose]
     @dry_run = opts[:dry_run]
+  end
+
+  def pretty?
+    @pretty
   end
 
   def run(action, arguments = {}, options = {})
@@ -69,7 +71,9 @@ class XCTool
     def build_command(action, arguments, options)
       options = to_options_string(options)
       arguments = to_options_string(arguments)
-      "#{xctool} #{options} #{action} #{arguments}".strip
+      cmd = "xcodebuild #{options} #{action} #{arguments}".strip
+      cmd += " | xcpretty -c" if pretty?
+      cmd
     end
 
     def execute(command)
@@ -83,10 +87,6 @@ class XCTool
 
     def log(message)
       puts "#{self.class}: #{message}" if verbose?
-    end
-
-    def xctool
-      xctool_path + XCTOOL_CMD
     end
 
     def default_base_options
