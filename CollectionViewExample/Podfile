@@ -5,6 +5,8 @@ target "CollectionViewExample" do
 end
 
 target "CollectionViewExampleTests", exclusive: true do
-  pod 'Kiwi'
+    pod 'Specta',      '~> 0.2.1'
+    pod 'Expecta',     '~> 0.3.0'
+    pod 'OCMockito',   '~> 1.3.0'
 end
 
