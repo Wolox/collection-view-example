@@ -8,7 +8,7 @@ namespace :xcode do
   XCodeBuild::ACTIONS.each do |action|
     desc "Runs xcodebuild's #{action} action"
     task action do
-      xcodebuild.send(action)
+      xcodebuild.run(action)
     end
   end
 end
