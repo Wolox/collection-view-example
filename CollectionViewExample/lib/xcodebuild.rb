@@ -3,7 +3,6 @@ class XCodeBuild
   ACTIONS = %w(
     clean
     build
-    build-tests
     test
     archive
     analyze
