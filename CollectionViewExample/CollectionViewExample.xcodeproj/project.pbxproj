@@ -30,6 +30,8 @@
 			<string>PBXGroup</string>
 			<key>name</key>
 			<string>Pods</string>
+			<key>path</key>
+			<string>Pods</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -57,7 +59,7 @@
 			<key>name</key>
 			<string>Pods-CollectionViewExampleTests.debug.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CollectionViewExampleTests/Pods-CollectionViewExampleTests.debug.xcconfig</string>
+			<string>Pods-CollectionViewExampleTests.debug.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -139,9 +141,42 @@ fi
 			<key>name</key>
 			<string>Pods-CollectionViewExample.release.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CollectionViewExample/Pods-CollectionViewExample.release.xcconfig</string>
+			<string>Pods-CollectionViewExample.release.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9D1CBF7819CB0EEE00894D70</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>HTTPStubHelpers.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9D1CBF7919CB0EEE00894D70</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>HTTPStubHelpers.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9D1CBF7A19CB0EEE00894D70</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9D1CBF7919CB0EEE00894D70</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>9D32B64C19A532A6009526A9</key>
 		<dict>
@@ -152,6 +187,8 @@ fi
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
+			<string>ViewModels</string>
+			<key>path</key>
 			<string>ViewModels</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
@@ -791,6 +828,7 @@ fi
 			<key>files</key>
 			<array>
 				<string>9D32B65019A53CBD009526A9</string>
+				<string>9D1CBF7A19CB0EEE00894D70</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -820,6 +858,7 @@ fi
 			<key>files</key>
 			<array>
 				<string>9D5BBB181997FD8D000E6A51</string>
+				<string>9DCC2D4219CB005100A56E17</string>
 			</array>
 			<key>isa</key>
 			<string>PBXResourcesBuildPhase</string>
@@ -928,8 +967,12 @@ fi
 		<dict>
 			<key>children</key>
 			<array>
+				<string>9DCC2D4319CB006000A56E17</string>
+				<string>9DCC2D4019CA3C9A00A56E17</string>
 				<string>9D32B64C19A532A6009526A9</string>
 				<string>9D5BBB141997FD8D000E6A51</string>
+				<string>9D1CBF7819CB0EEE00894D70</string>
+				<string>9D1CBF7919CB0EEE00894D70</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1931,6 +1974,67 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>9DCC2D4019CA3C9A00A56E17</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SpecHelper.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9DCC2D4119CB005100A56E17</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.jpeg</string>
+			<key>name</key>
+			<string>product-image.jpg</string>
+			<key>path</key>
+			<string>../../../../../../../../Desktop/product-image.jpg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9DCC2D4219CB005100A56E17</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9DCC2D4119CB005100A56E17</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9DCC2D4319CB006000A56E17</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9DCC2D4419CB007E00A56E17</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Fixtures</string>
+			<key>path</key>
+			<string>Fixtures</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9DCC2D4419CB007E00A56E17</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9DCC2D4119CB005100A56E17</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Images</string>
+			<key>path</key>
+			<string>Images</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>B8404EBC917596B51E62BE73</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1942,7 +2046,7 @@ fi
 			<key>name</key>
 			<string>Pods-CollectionViewExampleTests.release.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CollectionViewExampleTests/Pods-CollectionViewExampleTests.release.xcconfig</string>
+			<string>Pods-CollectionViewExampleTests.release.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1964,7 +2068,7 @@ fi
 			<key>name</key>
 			<string>Pods-CollectionViewExample.debug.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods-CollectionViewExample/Pods-CollectionViewExample.debug.xcconfig</string>
+			<string>Pods-CollectionViewExample.debug.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
