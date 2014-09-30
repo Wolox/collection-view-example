@@ -1,0 +1,10 @@
+language: objective-c
+
+before_install: bundle install && cd CollectionViewExample && bundle exec pod install && cd -
+
+cache:
+  - bundler
+  - cocoapods
+
+script: 
+  cd CollectionViewExample && VERBOSE=true rake xcode:test
