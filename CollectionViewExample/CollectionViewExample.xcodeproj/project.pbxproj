@@ -42,6 +42,7 @@
 		9D6C35A1199846F100EE0781 /* ProductCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6C35A0199846F100EE0781 /* ProductCollectionViewModel.m */; };
 		9DB38F5019986662003948CC /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB38F4F19986662003948CC /* ProductCollectionViewCell.xib */; };
 		E0A9852819F805DA008049E1 /* ProductCollectionViewModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A9852719F805DA008049E1 /* ProductCollectionViewModelSpec.m */; };
+		E0A9852A19F80708008049E1 /* ImageFetcherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A9852919F80708008049E1 /* ImageFetcherSpec.m */; };
 		E15DEE203175660BB631FB76 /* libPods-CollectionViewExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143085CB097948B397B0A702 /* libPods-CollectionViewExample.a */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		B104E2AC9BDB45091593BF75 /* Pods-CollectionViewExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CollectionViewExampleTests/Pods-CollectionViewExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		C8348E5231D0BAA5C69772E4 /* Pods-CollectionViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CollectionViewExample/Pods-CollectionViewExample.release.xcconfig"; sourceTree = "<group>"; };
 		E0A9852719F805DA008049E1 /* ProductCollectionViewModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewModelSpec.m; sourceTree = "<group>"; };
+		E0A9852919F80708008049E1 /* ImageFetcherSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageFetcherSpec.m; path = Services/ImageFetcherSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +398,7 @@
 		E0A9852619F80589008049E1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E0A9852919F80708008049E1 /* ImageFetcherSpec.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0A9852A19F80708008049E1 /* ImageFetcherSpec.m in Sources */,
 				9D32B65019A53CBD009526A9 /* ProductViewModelSpec.m in Sources */,
 				9D1CBF7A19CB0EEE00894D70 /* HTTPStubHelpers.m in Sources */,
 				E0A9852819F805DA008049E1 /* ProductCollectionViewModelSpec.m in Sources */,
