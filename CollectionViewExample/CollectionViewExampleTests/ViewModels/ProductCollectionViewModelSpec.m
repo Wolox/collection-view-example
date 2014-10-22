@@ -11,6 +11,7 @@
 #import "ProductFactory.h"
 #import "Product.h"
 #import "ProductViewModel.h"
+#import "FetchAllProductFetcher.h"
 
 SpecBegin(ProductCollectionViewModel)
 
@@ -31,11 +32,11 @@ beforeEach(^{
     notAddedProduct = [productFactory createProduct];
     
     products = [[NSMutableArray alloc] init];
-    [products addObject: product1];
-    [products addObject: product2];
-    [products addObject: product3];
+    [products addObject:product1];
+    [products addObject:product2];
+    [products addObject:product3];
     
-    productCollectionViewModel = [[ProductCollectionViewModel alloc] initWithProducts: products andRepository: repository];
+    productCollectionViewModel = [[ProductCollectionViewModel alloc] initWithProducts:products andRepository:repository];
 });
 
 afterEach(^{
@@ -48,30 +49,62 @@ afterEach(^{
 
 describe(@"#loadWithErrorHandler", ^{
     context(@"when loadWithErrorHandler: was not called", ^{
-        it(@"Products is is nil", ^{
+        __block ProductCollectionViewModel * originalProductCollectionViewModel = nil;
+        
+        beforeEach(^{
+            originalProductCollectionViewModel = productCollectionViewModel;
+            productCollectionViewModel = [[ProductCollectionViewModel alloc] initWithProducts:nil andRepository:repository];
+        });
+        
+        afterEach(^{
+            productCollectionViewModel = originalProductCollectionViewModel;
+            originalProductCollectionViewModel = nil;
+        });
+        
+        it(@"the products are nil", ^{
             expect([productCollectionViewModel productsCount]).to.equal(0);
         });
         
     });
-    context(@"Is called with a handler", ^{
-        context(@"No error while loading", ^{
-            it(@"Load the products", ^AsyncBlock{
+    context(@"when is called with a handler", ^{
+        context(@"when no error while loading", ^{
+            it(@"loads the products", ^{
                 [productCollectionViewModel loadWithErrorHandler:^(NSError * error) {
-                    NSLog(@"Test: Error loading products");
-                    done();
+                    expect(error).to.beNil;
                 }];
-                expect([productCollectionViewModel productsCount]).to.beGreaterThanOrEqualTo(1);
+                expect([productCollectionViewModel productsCount]).to.equal([products count]);
                 
             });
         });
-        context(@"Error while loading", ^{
-            it(@"Don't load the products", ^AsyncBlock{
+        context(@"when an error occur while loading", ^{
+            
+            __block id<ProductFetcher> mockProductFetcher;
+            __block id<ProductFetcher> originalProductFetcher;
+            __block NSError * error;
+            
+            beforeEach(^{
+                error = [NSError errorWithDomain:@"foo" code:0 userInfo:nil];
+                mockProductFetcher = mockProtocol(@protocol(ProductFetcher));
+                originalProductFetcher = productCollectionViewModel.productFetcher;
+                productCollectionViewModel.productFetcher = mockProductFetcher;
+            });
+            
+            afterEach(^{
+                error = nil;
+                mockProductFetcher = nil;
+                productCollectionViewModel.productFetcher = originalProductFetcher;
+            });
+            
+            it(@"doesn't load the products", ^AsyncBlock{
                 [productCollectionViewModel loadWithErrorHandler:^(NSError * error) {
-                    NSLog(@"Test: Error loading products");
+                    expect(error).notTo.beNil;
                     done();
                 }];
-                expect([productCollectionViewModel productsCount]).to.equal(0);
                 
+                MKTArgumentCaptor * blockCaptor = [[MKTArgumentCaptor alloc] init];
+                [MKTVerify(mockProductFetcher) fetchProductsWithHandler:blockCaptor.capture];
+                void(^block)(NSError *, NSArray *) = blockCaptor.value;
+                block(error, nil);
             });
         });
         
@@ -79,16 +112,16 @@ describe(@"#loadWithErrorHandler", ^{
 });
 
 describe(@"#addProductViewModel:", ^{
-    context(@"The product isn't added", ^{
-        it(@"Adds the product", ^{
+    context(@"when the product isn't added", ^{
+        it(@"adds the product", ^{
             ProductViewModel * productVM = [[ProductViewModel alloc] initWithProduct:notAddedProduct andRepository:repository];
             NSInteger countBefore = [productCollectionViewModel productsCount];
             [productCollectionViewModel addProductViewModel:productVM];
             expect([productCollectionViewModel productsCount]).to.equal(countBefore+1);
         });
     });
-    context(@"The product is already added", ^{
-        it(@"It adds it again", ^{
+    context(@"when the product is already added", ^{
+        it(@"it adds it again", ^{
             ProductViewModel * productVM = [productCollectionViewModel productAtIndex:0];
             NSInteger countBefore = [productCollectionViewModel productsCount];
             [productCollectionViewModel addProductViewModel:productVM];
@@ -98,69 +131,132 @@ describe(@"#addProductViewModel:", ^{
 });
 
 describe(@"#removeProductViewModel:", ^{
-    context(@"The product is included", ^{
-        it(@"Removes the product", ^{
-            ProductViewModel * productVM = [productCollectionViewModel productAtIndex:0];
+    context(@"when the product is included", ^{
+        
+        __block ProductViewModel * productViewModel = nil;
+        
+        beforeEach(^{
+            productViewModel = [productCollectionViewModel productAtIndex:0];
+        });
+        
+        afterEach(^{
+            productViewModel = nil;
+        });
+        
+        it(@"removes the product", ^{
             NSInteger countBefore = [productCollectionViewModel productsCount];
-            [productCollectionViewModel removeProductViewModel:productVM];
+            [productCollectionViewModel removeProductViewModel:productViewModel];
             expect([productCollectionViewModel productsCount]).to.equal(countBefore-1);
         });
     });
-    context(@"The product isn't included", ^{
-        it(@"Does nothing", ^{
-            ProductViewModel * productVM = [[ProductViewModel alloc] initWithProduct:notAddedProduct andRepository:repository];
-            expect(^{[productCollectionViewModel removeProductViewModel:productVM];}).notTo.raiseAny();
+    context(@"when the product isn't included", ^{
+        
+        __block ProductViewModel * productViewModel = nil;
+        
+        beforeEach(^{
+            productViewModel = [[ProductViewModel alloc] initWithProduct:notAddedProduct andRepository:repository];
+        });
+        
+        afterEach(^{
+            productViewModel = nil;
+        });
+        
+        it(@"does nothing", ^{
+            expect(^{[productCollectionViewModel removeProductViewModel:productViewModel];}).notTo.raiseAny();
         });
     });
 });
 
 describe(@"#productAtIndex:", ^{
-    context(@"Invalid index is passed", ^{
-        it(@"Error expected", ^{
-            expect(^{[productCollectionViewModel productAtIndex: [products count]+1 ];}).to.raise(@"NSRangeException");
+    context(@"when invalid index is passed", ^{
+        it(@"error expected", ^{
+            expect(^{[productCollectionViewModel productAtIndex:[products count]+1 ];}).to.raise(@"NSRangeException");
         });
     });
     
-    context(@"Valid index is passed", ^{
-        it(@"Return valid product", ^{
-            expect([productCollectionViewModel productAtIndex: 0 ]).to.beInstanceOf([ProductViewModel class]);
+    context(@"when valid index is passed", ^{
+        it(@"returns a valid product", ^{
+            expect([productCollectionViewModel productAtIndex:0 ]).to.beInstanceOf([ProductViewModel class]);
         });
     });
 });
 
 describe(@"#productsCount", ^{
-    context(@"Empty products list", ^{
+    context(@"when products list is empty", ^{
+        
+        __block ProductCollectionViewModel * originalProductCollectionViewModel;
+        
+        beforeEach(^{
+            originalProductCollectionViewModel = productCollectionViewModel;
+            productCollectionViewModel = [[ProductCollectionViewModel alloc] initWithProducts:nil andRepository:repository];
+        });
+        
+        afterEach(^{
+            productCollectionViewModel = originalProductCollectionViewModel;
+            originalProductCollectionViewModel = nil;
+        });
+        
         it(@"returns zero", ^{
-            productCollectionViewModel = [[ProductCollectionViewModel alloc] initWithProducts: nil andRepository: repository];
             expect([productCollectionViewModel productsCount]).to.equal(0);
         });
     });
-    context(@"Filled products list", ^{
-        it(@"Returns amount of products", ^{
+    context(@"when product list isn't empty", ^{
+        it(@"returns amount of products", ^{
             expect([productCollectionViewModel productsCount]).to.equal([products count]);
         });
     });
 });
 
 describe(@"#indexOfProductViewModel:", ^{
-    context(@"Product list is empty", ^{
-        it(@"Don't find product", ^{
-            productCollectionViewModel = [[ProductCollectionViewModel alloc] initWithProducts: nil andRepository: repository];
-            ProductViewModel * productVM = [[ProductViewModel alloc] initWithProduct:notAddedProduct andRepository:repository];
-            expect([productCollectionViewModel indexOfProductViewModel:productVM]).to.equal(NSNotFound);
+    context(@"when product list is empty", ^{
+        __block ProductCollectionViewModel * originalProductCollectionViewModel = nil;
+        __block ProductViewModel * productViewModel = nil;
+        
+        beforeEach(^{
+            originalProductCollectionViewModel = productCollectionViewModel;
+            productCollectionViewModel = [[ProductCollectionViewModel alloc] initWithProducts:nil andRepository:repository];
+            productViewModel = [[ProductViewModel alloc] initWithProduct:notAddedProduct andRepository:repository];
+        });
+        
+        afterEach(^{
+            productViewModel = nil;
+            productCollectionViewModel = originalProductCollectionViewModel;
+            originalProductCollectionViewModel = nil;
+        });
+
+        it(@"don't find product", ^{
+            expect([productCollectionViewModel indexOfProductViewModel:productViewModel]).to.equal(NSNotFound);
         });
     });
-    context(@"Product list if filled", ^{
-        context(@"Product is included", ^{
-            it(@"Return the position", ^{
-                ProductViewModel * productVM = [[ProductViewModel alloc] initWithProduct:[products objectAtIndex:0] andRepository:repository];
-                expect([productCollectionViewModel indexOfProductViewModel:productVM]).notTo.equal(0);
+    context(@"when the product list has products", ^{
+        context(@"when the product is included", ^{
+            __block ProductViewModel * productViewModel = nil;
+            
+            beforeEach(^{
+                productViewModel = [[ProductViewModel alloc] initWithProduct:[products objectAtIndex:0] andRepository:repository];
+            });
+            
+            afterEach(^{
+                productViewModel = nil;
+            });
+            
+            it(@"return the position", ^{
+                expect([productCollectionViewModel indexOfProductViewModel:productViewModel]).notTo.equal(0);
             });
         });
-        context(@"Product isn't included", ^{
-            it(@"Don't find product", ^{
-                ProductViewModel * productVM = [[ProductViewModel alloc] initWithProduct:notAddedProduct andRepository:repository];
-                expect([productCollectionViewModel indexOfProductViewModel:productVM]).to.equal(NSNotFound);
+        context(@"when the product isn't included", ^{
+            __block ProductViewModel * productViewModel = nil;
+            
+            beforeEach(^{
+                productViewModel = [[ProductViewModel alloc] initWithProduct:notAddedProduct andRepository:repository];
+            });
+            
+            afterEach(^{
+                productViewModel = nil;
+            });
+            
+            it(@"don't find product", ^{
+                expect([productCollectionViewModel indexOfProductViewModel:productViewModel]).to.equal(NSNotFound);
             });
         });
     });

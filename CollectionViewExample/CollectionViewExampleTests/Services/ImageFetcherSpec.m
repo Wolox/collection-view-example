@@ -15,17 +15,21 @@ __block ImageFetcher * imageFetcher = nil;
 
 
 beforeEach(^{
-    NSURL * URL = [[NSURL alloc] initWithString:@"string"];
-    imageFetcher = [[ImageFetcher alloc] initWithImageURL:URL];
+    NSURL * imageURL = [[NSURL alloc] initWithString:@"http://localhost:8080/test.png"];
+    imageFetcher = [[ImageFetcher alloc] initWithImageURL:imageURL];
 });
 
 afterEach(^{
     imageFetcher = nil;
 });
 
+afterAll(^{
+    [OHHTTPStubs removeAllStubs];
+});
+
 describe(@"#fetchImageWithHandler:", ^{
-    context(@"Called with a valid handler", ^{
-        it(@"Call the handler", ^AsyncBlock{
+    context(@"when called with a valid handler", ^{
+        it(@"invoke the handler", ^AsyncBlock{
             [imageFetcher fetchImageWithHandler:^(NSError * error, UIImage * image) {
                 done();
             }];
